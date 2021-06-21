@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route  } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './components/Home';
+import GameHeader from './components/GameHeader';
 import Game from './components/Game';
-import Add from './components/Add';
-import FireStoreData from './components/FireStoreData';
-import { useGetData } from './hooks/useGetData';
+
+import './App.css';
 
 import firebase from 'firebase';
 
 function App() {
+    const [level, setLevel] = useState(1);
     const [levelData, setLevelData] = useState({});
     
     useEffect(() => {
@@ -27,20 +28,21 @@ function App() {
     }, [])
 
     return (
+        <div className='App'>
+            <Router>
+                <Switch>
+                    <Route path='/game'>
+                        <GameHeader level={level} levelData={levelData} />
+                        <Game level={level} levelData={levelData} />
+                    </Route>
+                    <Route>
+                        <Header />
+                        <Home setLevel={setLevel} levelData={levelData}/>
+                    </Route>
+                </Switch>
+            </Router>
+        </div>
         
-        <Router>
-            <Switch>
-                <Route path='/game'>
-                    <Header />
-                    <Game />
-                </Route>
-                <Route>
-                    {/* <img src={imgUrl} alt=''></img> */}
-                    <Header />
-                    <Home levelData={levelData}/>
-                </Route>
-            </Switch>
-        </Router>
     );
 }
 

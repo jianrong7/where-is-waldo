@@ -1,11 +1,18 @@
-header {
+.mainHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid rgb(216, 216, 216);
+    padding: 0 2vw;
+}
+.header {
     height: 10vh;
     display: flex;
     justify-content: center;
-    border-bottom: 2px solid rgb(216, 216, 216);
+    align-items: center;
     cursor: initial;
 }
-span {
+.headerText {
     display: block;
     color: #FA3666;
     font-size: 7vh;
@@ -13,8 +20,33 @@ span {
     margin-left: 1vw;
     cursor: pointer;
 }
-img {
+.headerImg {
     height: 8vh;
     width: auto;
     cursor: pointer;
+}
+.gameHeader {
+    display: flex;
+}
+.gameHeaderImg {
+    height: 6vh;
+    width: auto;
+}
+.gameHeaderDetails {
+    display: flex;
+    flex-flow: column wrap;
+    padding: 0 1vh;
+}
+.gameHeaderDetails span {
+    font-size: 1vw;
+    font-weight: 600;
+    text-align: center;
+}
+.returnHomeBtn {
+    background-color: #FA3666;
+    color: white;
+    font-size: 3vh;
+    font-weight: 600;
+    padding: 1vh;
+    border-radius: 15px;
 }

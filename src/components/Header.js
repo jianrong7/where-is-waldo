@@ -14,11 +14,11 @@ export default function Header() {
     }, [])
     
     return(
-        <Link to='/' style={{ textDecoration: 'none' }} className='header'>
-            <header>
-                <img src={imgUrl} alt="waldo-header" />
-                <span>Where's</span>
-                <span>Waldo</span>
+        <Link to='/' style={{ textDecoration: 'none' }}>
+            <header className={styles.header} style={{ borderBottom: '2px solid rgb(216, 216, 216)' }}>
+                <img className={styles.headerImg} src={imgUrl} alt="waldo-header" />
+                <span className={styles.headerText}>Where's</span>
+                <span className={styles.headerText}>Waldo</span>
             </header>
         </Link> 
     );

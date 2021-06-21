@@ -1,38 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Levels from './Levels';
+import styles from './Home.module.css';
 
-export default function Home({ levelData }) {
-    const [levelDataHome, setLevelDataHome] = useState(levelData);
-
-    useEffect(() => {
-        setLevelDataHome(levelData);
-    }, [])
+function Home({ setLevel, levelData }) {
 
     return(
-        <div>
+        <div className={styles.home}>
             {Object.keys(levelData).map((key, index) => {
                 return (
-                    <Levels levelData={levelData[key]} key={key + index}/>
+                    <Levels setLevel={setLevel} levelData={levelData[key]} key={key + index} />
                 );
             })}
         </div>
     );  
 };
 
-    // const [imgUrls, setImgUrls] = useState([]);
-
-    // const fetchLevelsPictures = async () => {
-    //     let tempImgUrls = [];
-    //     const response = await firebase.storage().ref('levels').listAll()
-    //         .then(result => {
-    //             result.items.forEach(imageRef => {
-    //                 imageRef.getDownloadURL()
-    //                 .then(url => {
-    //                     tempImgUrls.push(url)
-    //                 })
-    //             })
-    //         }).catch(error => {
-    //             console.log(error)
-    //     });
-    //     setImgUrls(tempImgUrls)
-    // }
+export default Home;
