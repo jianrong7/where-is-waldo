@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route  } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './components/Home';
-import GameHeader from './components/GameHeader';
 import Game from './components/Game';
 
 import './App.css';
@@ -32,7 +31,7 @@ function App() {
             <Router>
                 <Switch>
                     <Route path='/game'>
-                        <GameHeader level={level} levelData={levelData} />
+                        
                         <Game level={level} levelData={levelData} />
                     </Route>
                     <Route>

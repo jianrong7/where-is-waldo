@@ -36,6 +36,7 @@
     display: flex;
     flex-flow: column wrap;
     padding: 0 1vh;
+    align-items: center;
 }
 .gameHeaderDetails span {
     font-size: 1vw;
@@ -49,4 +50,11 @@
     font-weight: 600;
     padding: 1vh;
     border-radius: 15px;
+}
+.gameHeaderDetailsFound {
+    display: flex;
+    flex-flow: column wrap;
+    padding: 0 1vh;
+    opacity: 0.5;
+    align-items: center;
 }
