@@ -8,8 +8,9 @@ import Modal from '../Modal';
 import firebase from 'firebase';
 import { clone } from 'lodash';
 import { checkValid, millisToMinutesAndSeconds } from '../utils/utils';
+import { Redirect } from 'react-router-dom';
 
-export default function Game({ level, levelData }) {
+export default function Game({ level = 1, levelData = {} }) {
     const [gameData, setGameData] = useState(levelData[level]);
     const [clickedCoords, setClickedCoords] = useState({});
     const [clickedCoordsPercentage, setClickedCoordsPercentage] = useState({});
@@ -18,8 +19,8 @@ export default function Game({ level, levelData }) {
     const [gameID, setGameID] = useState(null);
     const [timer, setTimer] = useState(0);
     const [serverTimer, setServerTimer] = useState(0);
-    useEffect(() => {        
-        const timestamp = Date.now()
+    useEffect(() => {
+        const timestamp = Date.now();
         firebase.firestore()
             .collection('games')
             .add({
@@ -39,10 +40,6 @@ export default function Game({ level, levelData }) {
             }
         }
         setIsGameOver(true)
-        return () => {
-            setGameData(levelData[level])
-            setIsGameOver(false)
-        }
     }, [gameData, isGameOver]);
     useEffect(() => {
         let interval;
@@ -106,24 +103,12 @@ export default function Game({ level, levelData }) {
                 username,
                 time: serverTimer
             })
-        resetState()
-    }
-    const handleCancel = () => {
-        resetState()
-    }
-    const resetState = () => {
-        setGameData(levelData[level]);
-        setClickedCoords({});
-        setClickedCoordsPercentage({});
-        setShowDropdown(false);
-        setIsGameOver(false);
-        setGameID(null);
-        setTimer(0);
-        setServerTimer(0);
     }
 
-    if (gameData === null) {
-        return(null)
+    if (!gameData) {
+        return(
+            <Redirect to='/'/>
+        )
     } else {
         return(
             <>
@@ -144,7 +129,7 @@ export default function Game({ level, levelData }) {
                         />
                     </OutsideClickHandler>
                 </div>
-                {isGameOver === true ? <Modal timer={serverTimer} handleCancel={handleCancel} handleSubmit={handleSubmit}/> : null}
+                {isGameOver === true ? <Modal timer={serverTimer} handleSubmit={handleSubmit}/> : null}
             </>
         );  
     }

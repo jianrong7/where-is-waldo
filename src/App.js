@@ -32,7 +32,7 @@ function App() {
             <Router>
                 <Switch>
                     <Route path='/game'>
-                        <Game level={level} levelData={levelData} />
+                        <Game key={level} level={level} levelData={levelData} />
                     </Route>
                     <Route path='/leaderboard'>
                         <Leaderboard levelData={levelData}/>

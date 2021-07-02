@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../Header';
-import Home from './Home';
 import firebase from 'firebase';
 import Levels from '../Levels';
 import LeaderboardTable from '../LeaderboardTable';

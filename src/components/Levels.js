@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './pages/Home.module.css';
-import { Link } from 'react-router-dom';
 
 export default function Levels({ levelData }) {
     return(

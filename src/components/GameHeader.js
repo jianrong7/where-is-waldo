@@ -1,22 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './Header.module.css';
-import firebase from 'firebase';
-import { Link } from 'react-router-dom';
 import Header from './Header';
 
 import { formatTime } from './utils/utils';
 
 export default function GameHeader({ people, timer }) {
-    const [imgUrl, setImgUrl] = useState('');
-    useEffect(() => {
-        firebase.storage().ref().child('waldo-header.png').getDownloadURL().then(url => {
-            setImgUrl(url);
-        }).catch(error => {
-            console.log('Error fetching image from Firebase Storage: ', error)
-        });
-    }, [])
-
-    
     return(
         <div className={styles.mainHeader}>
             <div className={styles.gameHeader}>

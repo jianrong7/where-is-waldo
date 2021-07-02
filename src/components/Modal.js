@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './Modal.module.css';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-export default function Modal({ timer, handleCancel, handleSubmit }) {
+export default function Modal({ timer, handleSubmit }) {
     const [username, setUsername] = useState('');
 
     const handleChange = (e) => {
         setUsername(e.target.value)
-    }
-    const handleModalCancel = () => {
-        handleCancel();
     }
     const handleModalSubmit = (e) => {
         handleSubmit(username);
@@ -31,7 +28,7 @@ export default function Modal({ timer, handleCancel, handleSubmit }) {
                     </form>
                 </div>
                 <div className={styles.modalFooter}>
-                    <Link to='/' onClick={handleModalCancel} className={styles.modalButton}>Cancel</Link>
+                    <Link to='/' className={styles.modalButton}>Cancel</Link>
                     <Link to='/leaderboard' onClick={handleModalSubmit} className={styles.modalButton}>Submit</Link>
                 </div>
             </div>
