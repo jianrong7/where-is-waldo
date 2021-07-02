@@ -15,7 +15,7 @@ export default function Header() {
     
     return(
         <Link to='/' style={{ textDecoration: 'none' }}>
-            <header className={styles.header} style={{ borderBottom: '2px solid rgb(216, 216, 216)' }}>
+            <header className={styles.header}>
                 <img className={styles.headerImg} src={imgUrl} alt="waldo-header" />
                 <span className={styles.headerText}>Where's</span>
                 <span className={styles.headerText}>Waldo</span>

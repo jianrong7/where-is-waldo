@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './Game.module.css';
+import styles from './pages/Game.module.css';
 
 export default function CharacterDropdown({ showDropdown, clickedCoords, gameData, clicked }) {
     const [gameDataPeople, setGameDataPeople] = useState(gameData.people)

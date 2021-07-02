@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import styles from './Header.module.css';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';
-import ReturnHomeBtn from './ReturnHomeBtn';
 import Header from './Header';
 
-export default function GameHeader({ people }) {
+export default function GameHeader({ people, timer }) {
     const [imgUrl, setImgUrl] = useState('');
     useEffect(() => {
         firebase.storage().ref().child('waldo-header.png').getDownloadURL().then(url => {
@@ -14,6 +13,14 @@ export default function GameHeader({ people }) {
             console.log('Error fetching image from Firebase Storage: ', error)
         });
     }, [])
+    const formatTime = (time) => {
+        const getSeconds = `0${Math.round(time % 60)}`.slice(-2);
+        const minutes = `${Math.floor(time / 60)}`;
+        const getMinutes = `0${minutes % 60}`.slice(-2);
+        const getHours = `0${Math.floor(time / 3600)}`.slice(-2);
+      
+        return `${getHours}:${getMinutes}:${getSeconds}`;
+    };
     
     return(
         <div className={styles.mainHeader}>
@@ -38,7 +45,9 @@ export default function GameHeader({ people }) {
                 })}
             </div>
             <Header />
-            <ReturnHomeBtn/>
+            <div className={styles.timer}>
+                {formatTime(timer)}
+            </div>
         </div>
 
     );

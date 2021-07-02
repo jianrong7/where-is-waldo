@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route  } from 'react-router-dom';
 import Header from './components/Header';
-import Home from './components/Home';
-import Game from './components/Game';
+import Home from './components/pages/Home';
+import Game from './components/pages/Game';
+import Leaderboard from './components/pages/Leaderboard';
 
 import './App.css';
 
@@ -31,8 +32,10 @@ function App() {
             <Router>
                 <Switch>
                     <Route path='/game'>
-                        
                         <Game level={level} levelData={levelData} />
+                    </Route>
+                    <Route path='/leaderboard'>
+                        <Leaderboard levelData={levelData}/>
                     </Route>
                     <Route>
                         <Header />

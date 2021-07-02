@@ -58,3 +58,8 @@
     opacity: 0.5;
     align-items: center;
 }
+.timer {
+    color: #FA3666;
+    font-size: 3vh;
+    font-weight: 700;
+}
