@@ -7,7 +7,7 @@ import Modal from '../Modal';
 
 import firebase from 'firebase';
 import { clone } from 'lodash';
-import { checkValid } from '../utils/utils';
+import { checkValid, millisToMinutesAndSeconds } from '../utils/utils';
 
 export default function Game({ level, levelData }) {
     const [gameData, setGameData] = useState(levelData[level]);
@@ -18,9 +18,8 @@ export default function Game({ level, levelData }) {
     const [gameID, setGameID] = useState(null);
     const [timer, setTimer] = useState(0);
     const [serverTimer, setServerTimer] = useState(0);
-
-    useEffect(() => {
-        const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+    useEffect(() => {        
+        const timestamp = Date.now()
         firebase.firestore()
             .collection('games')
             .add({
@@ -36,11 +35,14 @@ export default function Game({ level, levelData }) {
         for(const prop in gameData.people) {
             if(!gameData.people[prop]?.found) {
                 setIsGameOver(false)
-                console.log(isGameOver)
                 return
             }
         }
         setIsGameOver(true)
+        return () => {
+            setGameData(levelData[level])
+            setIsGameOver(false)
+        }
     }, [gameData, isGameOver]);
     useEffect(() => {
         let interval;
@@ -49,10 +51,9 @@ export default function Game({ level, levelData }) {
                 setTimer(timer => timer + 1);
             }, 1000);
         } else if (isGameOver) {
-            console.log(isGameOver)
             clearInterval(interval);
             setTimer(0);
-            const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+            const timestamp = Date.now();
             firebase.firestore()
                 .collection('games')
                 .doc(gameID)
@@ -64,7 +65,8 @@ export default function Game({ level, levelData }) {
                         .collection('games')
                         .doc(gameID)
                         .onSnapshot(doc => {
-                            setServerTimer(doc.data().endTime?.seconds - doc.data().startTime?.seconds)
+                            console.log(doc.data().endTime - doc.data().startTime)
+                            setServerTimer(millisToMinutesAndSeconds(doc.data().endTime - doc.data().startTime))
                         })
                 })
         }
@@ -104,9 +106,21 @@ export default function Game({ level, levelData }) {
                 username,
                 time: serverTimer
             })
-        console.log(username)
+        resetState()
     }
-
+    const handleCancel = () => {
+        resetState()
+    }
+    const resetState = () => {
+        setGameData(levelData[level]);
+        setClickedCoords({});
+        setClickedCoordsPercentage({});
+        setShowDropdown(false);
+        setIsGameOver(false);
+        setGameID(null);
+        setTimer(0);
+        setServerTimer(0);
+    }
 
     if (gameData === null) {
         return(null)
@@ -130,7 +144,7 @@ export default function Game({ level, levelData }) {
                         />
                     </OutsideClickHandler>
                 </div>
-                {isGameOver === true ? <Modal timer={serverTimer} handleSubmit={handleSubmit}/> : null}
+                {isGameOver === true ? <Modal timer={serverTimer} handleCancel={handleCancel} handleSubmit={handleSubmit}/> : null}
             </>
         );  
     }

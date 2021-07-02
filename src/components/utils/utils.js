@@ -8,4 +8,8 @@ const checkValid = (storedCoord, tryCoord) => {
     );
 }
 
-export { checkValid };
+const millisToMinutesAndSeconds = (millis) => {
+    var seconds = ((millis % 60000) / 1000).toFixed(0);
+    return `${seconds}.${millis - (seconds * 1000)}`;
+  }
+export { checkValid, millisToMinutesAndSeconds };
