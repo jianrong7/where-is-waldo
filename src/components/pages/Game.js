@@ -65,7 +65,7 @@ export default function Game({ level, levelData }) {
                         .collection('games')
                         .doc(gameID)
                         .onSnapshot(doc => {
-                            console.log(doc.data().endTime - doc.data().startTime)
+                            console.log(doc.data().endTime, doc.data().startTime)
                             setServerTimer(millisToMinutesAndSeconds(doc.data().endTime - doc.data().startTime))
                         })
                 })

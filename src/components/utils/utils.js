@@ -10,6 +10,15 @@ const checkValid = (storedCoord, tryCoord) => {
 
 const millisToMinutesAndSeconds = (millis) => {
     var seconds = ((millis % 60000) / 1000).toFixed(0);
-    return `${seconds}.${millis - (seconds * 1000)}`;
-  }
-export { checkValid, millisToMinutesAndSeconds };
+    console.log(millis - (seconds * 1000))
+    return `${seconds}.${millis.toString().slice(-3)}`;
+}
+
+const formatTime = (time) => {
+    const getSeconds = `0${Math.round(time % 60)}`.slice(-2);
+    const minutes = `${Math.floor(time / 60)}`;
+    const getMinutes = `0${minutes % 60}`.slice(-2);
+  
+    return `${getMinutes}:${getSeconds}`;
+};
+export { checkValid, millisToMinutesAndSeconds, formatTime };

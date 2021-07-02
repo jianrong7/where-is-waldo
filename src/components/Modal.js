@@ -32,7 +32,7 @@ export default function Modal({ timer, handleCancel, handleSubmit }) {
                 </div>
                 <div className={styles.modalFooter}>
                     <Link to='/' onClick={handleModalCancel} className={styles.modalButton}>Cancel</Link>
-                    <Link to='/' onClick={handleModalSubmit} className={styles.modalButton}>Submit</Link>
+                    <Link to='/leaderboard' onClick={handleModalSubmit} className={styles.modalButton}>Submit</Link>
                 </div>
             </div>
         </div>

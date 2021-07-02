@@ -4,6 +4,8 @@ import firebase from 'firebase';
 import { Link } from 'react-router-dom';
 import Header from './Header';
 
+import { formatTime } from './utils/utils';
+
 export default function GameHeader({ people, timer }) {
     const [imgUrl, setImgUrl] = useState('');
     useEffect(() => {
@@ -13,14 +15,7 @@ export default function GameHeader({ people, timer }) {
             console.log('Error fetching image from Firebase Storage: ', error)
         });
     }, [])
-    const formatTime = (time) => {
-        const getSeconds = `0${Math.round(time % 60)}`.slice(-2);
-        const minutes = `${Math.floor(time / 60)}`;
-        const getMinutes = `0${minutes % 60}`.slice(-2);
-        const getHours = `0${Math.floor(time / 3600)}`.slice(-2);
-      
-        return `${getHours}:${getMinutes}:${getSeconds}`;
-    };
+
     
     return(
         <div className={styles.mainHeader}>
